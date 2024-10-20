@@ -4,30 +4,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-# Configure MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Meghana@685'
 app.config['MYSQL_DB'] = 'iit_indore_users'
 
-# Initialize MySQL
 mysql = MySQL(app)
 
-# Secret key for session
 app.secret_key = 'your_secret_key'
-
-# Sample courses data
-courses = [
-    {"code": "CS 203/MA 213", "name":"Data Structures and Algorithms", "credits": 3},
-    {"code": "CS 207", "name": "Data Base & Information Systems", "credits": 3},
-    {"code": "CS 209", "name": "Logic Design", "credits": 3},
-    {"code": "CS 215", "name": "Mathematics for AI and ML", "credits": 3},
-    {"code": "CS 253/MA 253", "name": "Mathematics for AI and ML", "credits": 1.5},
-    {"code": "CS 257", "name": "Data Base & Information Systems Lab", "credits": 1.5},
-    {"code": "MA 205", "name": "Complex Analysis", "credits": 2},
-    {"code": "MA 207", "name": "Differential Equations II", "credits": 2},
-    {"code": "MA 211/CS 201", "name": "Discrete Mathematical Structures", "credits": 3},
-]
 
 @app.route('/')
 def home():
@@ -90,6 +74,11 @@ def logout():
 @app.route('/courses')
 def display_courses():
     if 'userid' in session:
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT code, name, credits FROM courses")
+        courses = cur.fetchall()
+        cur.close()
+
         return render_template('courses.html', courses=courses)
     return redirect(url_for('login'))
 
