@@ -25,9 +25,13 @@
                 <tbody>
                     {% for course in courses %}
                     <tr>
-                        <td>{{ course.code }}</td>
-                        <td>{{ course.name }}</td>
-                        <td>{{ course.credits }}</td>
+                        <td>{{ course[0] }}</td> 
+                        <td>{{ course[1] }}</td>  
+                        <td>{{ course[2] }}</td> 
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3">No courses available.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
