@@ -1,0 +1,17 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS iit_indore_users;
+
+-- Use the created database
+USE iit_indore_users;
+
+-- Create the users table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid VARCHAR(50) UNIQUE NOT NULL,
+    mobile VARCHAR(15) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Optionally, you can add an index on the userid column for faster lookups
+CREATE INDEX idx_userid ON users (userid);
