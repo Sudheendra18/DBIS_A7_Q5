@@ -15,3 +15,21 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Optionally, you can add an index on the userid column for faster lookups
 CREATE INDEX idx_userid ON users (userid);
+
+CREATE TABLE courses (
+    code VARCHAR(50),
+    name VARCHAR(100),
+    credits DECIMAL(3,1)
+);
+
+-- Insert the sample data
+INSERT INTO courses (code, name, credits) VALUES
+('CS 203/MA 213', 'Data Structures and Algorithms', 3),
+('CS 207', 'Data Base & Information Systems', 3),
+('CS 209', 'Logic Design', 3),
+('CS 215', 'Mathematics for AI and ML', 3),
+('CS 253/MA 253', 'Mathematics for AI and ML', 1.5),
+('CS 257', 'Data Base & Information Systems Lab', 1.5),
+('MA 205', 'Complex Analysis', 2),
+('MA 207', 'Differential Equations II', 2),
+('MA 211/CS 201', 'Discrete Mathematical Structures', 3);
